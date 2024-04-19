@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="/quanly" class="navbar-brand">Ứng dụng Quản lý mượn sách</a>
+    <!-- <a href="/quanly" class="navbar-brand">Ứng dụng Quản lý mượn sách</a> -->
     <div class="mr-auto navbar-nav">
       <li class="nav-item">
         <router-link :to="{ name: 'nxb' }" class="nav-link">
@@ -20,13 +20,14 @@
           <i class="fas fa-address-book"></i>
         </router-link>
       </li>
-      <li v-if="loggedInUser">
-        <p class="text-light mt-2 ml-auto"> Xin chào {{ loggedInUser.username }}</p>
-      <li>
-      <li class="nav-item">
-        <button @click="logout" class="btn btn-link nav-link">Đăng xuất</button>
-      </li>
-      </li>
+        <li v-if="loggedInUser && loggedInUser.role === 'admin'">
+
+        <p class="text-light mt-2 ml-auto"> Xin chào {{ loggedInUser.username }}  {{ loggedInUser.id }}  {{ loggedInUser.role }}</p>
+     
+        <li class="nav-item">
+          <button @click="logout" class="btn btn-link nav-link">Đăng xuất</button>
+        </li>
+     
       </li>
       <li v-else>
         <router-link :to="{name:'login.admin'}" class="nav-link">
@@ -37,17 +38,17 @@
     </div>
   </nav>
 </template>
-  
-  <script>
-  import { mapGetters,mapActions  } from 'vuex';
-  
-  export default {
-    computed: {
-      ...mapGetters(['loggedInUser'])
-    },
-    methods: {
+
+<script>
+import { mapGetters, mapActions } from 'vuex';
+
+export default {
+  computed: {
+    ...mapGetters(['loggedInUser'])
+  },
+  methods: {
     ...mapActions(['logout'])
   }
-  };
-  </script>
-  
+};
+
+</script>

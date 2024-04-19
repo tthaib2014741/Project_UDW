@@ -10,12 +10,13 @@
                 </router-link>
             </li>
             <li>
-                <router-link :to="{ name: 'muonsach' }" class="nav-link">
+                <router-link :to="{ name: 'muonsach.user' }" class="nav-link">
                     Mượn trả
                     <i class="fas fa-address-book"></i>
                 </router-link>
             </li>
-            <li v-if="loggedInUser">
+           <li v-if="loggedInUser && loggedInUser.role === 'user'">
+
                 <p class="text-light mt-2 ml-auto"> Xin chào {{ loggedInUser.username }}</p>
             <li>
             <li class="nav-item">

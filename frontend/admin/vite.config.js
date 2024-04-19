@@ -19,6 +19,10 @@ export default defineConfig({
           target: "http://localhost:3000/", // Địa chỉ của server backend
           changeOrigin: true, // Sử dụng origin của proxy cho request backend
       },
+       "/user": { // Đường dẫn cần được cấu hình proxy
+          target: "http://localhost:3000/", // Địa chỉ của server backend
+          changeOrigin: true, // Sử dụng origin của proxy cho request backend
+      },
     }
   },
 })

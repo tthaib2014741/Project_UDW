@@ -32,9 +32,12 @@ export default {
       try {
         const response = await nhanvienService.login(this.nhanvien);
         if (response.status === "success") {
-          // Lưu thông tin đăng nhập vào local storage
-          localStorage.setItem('loggedInUser', JSON.stringify({ username: response.user.username, id: response.user.id }));
-          this.setLoggedInUser({ username: response.user.username, id: response.user.id });
+          console.log('response:', response);
+
+          localStorage.setItem('loggedInUser', JSON.stringify({ username: response.user.HOTENNV, id: response.user._id ,role:"admin"}));
+          this.setLoggedInUser({ username: response.user.HOTENNV, id: response.user._id, role: "admin" });
+      //  console.log('loggedInUser:',loggedInUser.role);
+          
           this.$router.push('/quanly');
         } else {
           this.error = 'Tên đăng nhập hoặc mật khẩu không chính xác.';
@@ -48,7 +51,7 @@ export default {
     // Kiểm tra nếu có thông tin đăng nhập trong local storage khi component được tạo
     const loggedInUser = localStorage.getItem('loggedInUser');
     if (loggedInUser) {
-      this.setLoggedInUser(JSON.parse(loggedInUser));
+      this.$store.dispatch('setLoggedInUser', JSON.parse(loggedInUser));
     }
   }
 };

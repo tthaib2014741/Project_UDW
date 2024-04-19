@@ -38,7 +38,7 @@ class NhanvienService {
 
     async authenticate(username, password) {
         try {
-            console.log(`du lieu kt:::${username},:::${password}`);
+            console.log(`Quan ly::::du lieu kt:::${username},:::${password}`);
             const user = await this.Nhanvien.findOne({ HOTENNV: username });
             console.log(user);
             if (!user) {

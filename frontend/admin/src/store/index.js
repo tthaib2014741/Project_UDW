@@ -2,7 +2,7 @@ import { createStore } from 'vuex';
 
 const store = createStore({
   state: {
-    loggedInUser: null
+    loggedInUser: JSON.parse(localStorage.getItem('loggedInUser')) || null
   },
   mutations: {
     setLoggedInUser(state, user) {
@@ -17,6 +17,7 @@ const store = createStore({
       commit('setLoggedInUser', user);
     },
     logout({ commit }) {
+      localStorage.removeItem('loggedInUser');
       commit('clearLoggedInUser');
     }
   },

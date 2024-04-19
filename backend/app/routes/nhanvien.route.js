@@ -7,7 +7,7 @@ const passport = require('passport');
 
 
 router.route("/")
-    .post(nhanvienController.create); // Sửa tên biến
+    .post(nhanvienController.create); 
 
 
 
