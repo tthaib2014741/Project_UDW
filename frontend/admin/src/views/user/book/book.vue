@@ -1,11 +1,11 @@
 <template>
     <div class="">
 
-        <div class="mt-3 col-md-12">
-            <h4 class="text-center my-3">
+        <div class="mt-2 col-md-12">
+            <h4 class="text-center my-4">
                 Sách trong thư viện
             </h4>
-            <div class="my-2 px-5 mx-5">
+            <div class="my-2 px-5 mx-5 ">
                 <InputSearch v-model="searchText" />
             </div>
             <BookList v-if="Books.length > 0" :Books="filteredBooks" @deletebook="deletebook"

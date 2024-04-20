@@ -17,7 +17,7 @@
 
                     </div>
                     <hr>
-                    <a href="#" class="btn btn-outline-danger">Mượn sách</a>
+                    <a href="#" class="btn btn-outline-danger" @click="muonSach(book._id)">Mượn sách</a>
 
                 </div>
             </div>
@@ -33,10 +33,12 @@
 <script>
 import { useRouter } from 'vue-router';
 import NxbService from "@/services/nxb.service";
+import muonsachService from '@/services/muonsach.service';
+import { mapGetters } from "vuex";
 
 
 export default {
-    emits: ["delete:book"],
+
     props: {
         Books: {
             type: Array,
@@ -72,11 +74,29 @@ export default {
         return { editbook, };
     },
     methods: {
-        deletebook(id) {
-            console.log(id);
-            this.$emit("deletebook", id);
+        async muonSach(bookId) {
+            const router = useRouter();
 
-        },
+            const userId = this.loggedInUser.id;
+            const data = {
+                MASACH: bookId,
+                MADOCGIA: userId
+            };
+            try {
+                await muonsachService.create(data);
+               
+                const confirmViewButton = confirm("Thành công. Xem chi tiết sách đã mượn ");
+                if (confirmViewButton) {
+                    this.$router.push('/muon-sach');
+                }
+            } catch (error) {
+                console.error("Lỗi khi mượn sách:", error);
+                window.alert("Đã xảy ra lỗi khi mượn sách!");
+            }
+        }
+    },
+    computed: {
+        ...mapGetters(["loggedInUser"]),
     },
 };
 </script>

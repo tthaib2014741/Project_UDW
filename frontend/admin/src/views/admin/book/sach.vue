@@ -3,7 +3,7 @@
 
         <div class="mt-3 col-md-12">
             <h4 class="text-center my-3">
-                Sách trong thư viện<i class="fas fa-address-book"></i>
+                Sách trong thư viện
                 <div>
                     <InputSearch v-model="searchText" />
                 </div>

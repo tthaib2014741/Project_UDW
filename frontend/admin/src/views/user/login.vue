@@ -3,20 +3,20 @@
         <div class="col-sm-4"> </div>
 
         <form class="col-sm-4" @submit.prevent="login">
-            <h4 class="text-center my-2"> Đăng nhập </h4>
+            <h4 class="text-center my-2 text-primary   "> Đăng nhập </h4>
             <div data-mdb-input-init class="form-outline mb-4">
-                <input type="text" id="form2Example1" class="form-control" v-model="docgia.username" />
-                <label class="form-label" for="form2Example1">Tên Đọc Giả</label>
+                <input type="text" id="form2Example1" class="form-control" placeholder="Tên người dùng" v-model="docgia.username" />
+                
             </div>
 
 
             <div data-mdb-input-init class="form-outline mb-4">
-                <input type="password" id="form2Example2" class="form-control " v-model="docgia.password" />
-                <label class="form-label" for="form2Example2">Mật khẩu</label>
+                <input type="password" id="form2Example2" class="form-control " placeholder="Mật khẩu" v-model="docgia.password" />
+                
             </div>
 
 
-            <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block mb-4">Đăng
+            <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary btn-block mb-4">Đăng
                 nhập</button>
 
 

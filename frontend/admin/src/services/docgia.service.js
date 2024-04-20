@@ -14,6 +14,17 @@ class ContactService {
             throw error; // Re-throw lỗi để phía gọi có thể xử lý
         }
     }
+     async get(id) {
+        try {
+            const response= await this.api.get(`/${id}`);
+            return response.data;
+
+        } catch (error) {
+            console.error("Error while fetching data:", error);
+            throw error;
+        }
+       
+    }
     async login(data){
 
         try {
@@ -26,6 +37,7 @@ class ContactService {
             throw error; // Re-throw lỗi để phía gọi có thể xử lý
         }
     }
+
   
 
    

@@ -1,54 +1,66 @@
 <template>
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <!-- <a href="/quanly" class="navbar-brand">Ứng dụng Quản lý mượn sách</a> -->
-    <div class="mr-auto navbar-nav">
+  <nav class="navbar navbar-expand text-light px-5 bg-gradient-custom ">
+    
+    <div class="mr-auto navbar-nav ml-5 px-5">
       <li class="nav-item">
-        <router-link :to="{ name: 'nxb' }" class="nav-link">
-          Nhà xuất bản
-          <i class="fas fa-address-book"></i>
-        </router-link>
-      </li>
-      <li>
-        <router-link :to="{ name:'sach.admin'}" class="nav-link">
-          Sách
-          <i class="fas fa-address-book"></i>
-        </router-link>
-      </li>
-      <li>
-        <router-link :to="{ name:'muonsach.admin'}" class="nav-link">
-          Quản lý mượn tra
-          <i class="fas fa-address-book"></i>
-        </router-link>
-      </li>
-        <li v-if="loggedInUser && loggedInUser.role === 'admin'">
+        <router-link :to="{ name: 'nxb' }" class="nav-link text-light">
+          <i class="fas fa-address-book"></i> Nhà xuất bản
 
-        <p class="text-light mt-2 ml-auto"> Xin chào {{ loggedInUser.username }}  {{ loggedInUser.id }}  {{ loggedInUser.role }}</p>
-     
-        <li class="nav-item">
-          <button @click="logout" class="btn btn-link nav-link">Đăng xuất</button>
-        </li>
-     
-      </li>
-      <li v-else>
-        <router-link :to="{name:'login.admin'}" class="nav-link">
-          Đăng nhập
-          <i class="fas fa-address-book"></i>
         </router-link>
+      </li>
+      <li class="mx-3">
+        <router-link :to="{ name: 'sach.admin' }" class="nav-link text-light">
+          <i class="fa-solid fa-book" style="color: #ffffff;"></i> Sách
+         
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{ name: 'muonsach.admin' }" class="nav-link text-light">
+          <i class="fa-solid fa-list" style="color: #ffffff;"></i> Quản lý mượn trả
+
+        </router-link>
+      </li>
+    </div>
+
+    <div class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <div v-if="loggedInUser && loggedInUser.role === 'admin'" class="nav-item">
+          <div class="d-flex align-items-center text-light">
+            Xin chào {{ loggedInUser.username }}
+            <button @click="logout" class="btn btn-link nav-link text-light ml-2">
+              <i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffffff;"></i> Đăng xuất
+            </button>
+          </div>
+        </div>
+
+        <div v-else class="nav-item">
+          <router-link :to="{ name: 'login.admin' }" class="nav-link text-light ">
+            <i class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i> Đăng nhập
+
+          </router-link>
+        </div>
       </li>
     </div>
   </nav>
 </template>
+<style>
+.bg-gradient-custom {
+  color: white;
+  justify-content: center;
+  padding: 20px 150px;
+  font-size: 18px;
+}
 
+
+</style>
 <script>
-import { mapGetters, mapActions } from 'vuex';
-
+import { mapGetters, mapActions } from "vuex";
 export default {
   computed: {
-    ...mapGetters(['loggedInUser'])
+    ...mapGetters(["loggedInUser"]),
   },
   methods: {
-    ...mapActions(['logout'])
-  }
+    ...mapActions(["logout"]),
+  },
 };
-
 </script>

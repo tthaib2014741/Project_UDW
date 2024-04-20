@@ -1,11 +1,82 @@
 <template>
     <div class="page row">
-        <div class="mt-3 col-md-6">
-            <h4>
-                Thông tin mượn trả trong thư viện
-                <i class="fas fa-address-book"></i>
+
+        <div class="mt-3 col-md-12">
+            <h4 class="text-center my-3">
+                Thông tin mượn sách
+                <div>
+                    <InputSearch v-model="searchText" />
+                </div>
             </h4>
-            
+            <DanhSachMuon v-if="DanhSachMuon.length > 0" v-model:activeIndex="activeIndex"
+                :DanhSachMuon="DanhSachMuon" />
+            <p v-else>Không có mượn sách nào.</p>
+
         </div>
+
+
+
     </div>
 </template>
+
+<script>
+import DanhSachMuon from "@/components/danh_sach_muon_user.vue";
+import InputSearch from "@/components/book/Input_Search.vue";
+import MuonSachService from "@/services/muonsach.service";
+import { mapGetters } from "vuex";
+
+export default {
+    components: {
+        DanhSachMuon,
+        InputSearch,
+    },
+    data() {
+        return {
+            DanhSachMuon: [],
+            activeIndex: -1,
+            searchText: "",
+        };
+    },
+    watch: {
+        searchText() {
+            this.activeIndex = -1;
+        }
+    },
+    computed: {
+        activebook() {
+            if (this.activeIndex < 0) return null;
+            return this.DanhSachMuon[this.activeIndex];
+        },
+        ...mapGetters(["loggedInUser"]),
+    },
+    methods: {
+        async retrievebooks() {
+            try {
+                this.DanhSachMuon = await MuonSachService.get(this.loggedInUser.id);
+                console.log(this.DanhSachMuon);
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        refreshList() {
+            this.retrievebooks();
+        }
+
+
+    },
+
+
+    mounted() {
+        this.refreshList();
+    },
+
+
+};
+</script>
+
+<style scoped>
+.page {
+    text-align: left;
+    max-width: 950px;
+}
+</style>

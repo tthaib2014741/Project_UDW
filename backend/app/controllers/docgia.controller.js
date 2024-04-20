@@ -28,4 +28,20 @@ exports.create = async (req, res, next) => {
         console.log(error);
         return next(new ApiError(500, "An error occurred while creating "));
     }
+    
+};
+exports.get = async (req, res, next) => {
+
+    try {
+        const docgia = new Docgia(MongoDB.client);
+
+        const document = await docgia.findById(req.params.id);
+        if(!document){
+            return next(new ApiError(400, "Không tìm thấy nguoi dung "));
+        }
+        return res.send(document);
+    } catch (error) {
+        return next(new ApiError(500, "An error occurred while creating the contact"));
+    }
+   
 };

@@ -33,5 +33,9 @@ export default {
 .page {
   max-width: 400px;
   margin: auto;
+  
+}
+body{
+  font-family: Roboto;
 }
 </style>

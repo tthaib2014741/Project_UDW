@@ -30,10 +30,11 @@ class ContactService {
     }
     async get(id) {
         try {
-            const response= await this.api.get(`/${id}`);
+            const response = await this.api.get(`/${id}`);
+            console.log("lay sach da muon:")
             console.log(response.data);
             // console.log("get id");
-            return response.data;
+            return response;
 
         } catch (error) {
             console.error("Error while fetching data:", error);

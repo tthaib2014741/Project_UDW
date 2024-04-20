@@ -1,8 +1,9 @@
 <template>
     <div class="page row">
-
-        Trng chur usserr
-        </div>
+        <h1 class="text-center text-primary">
+            Chào mừng đến với thư viện UDW
+        </h1>
+    </div>
 
 
 

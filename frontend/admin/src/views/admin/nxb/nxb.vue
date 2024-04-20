@@ -3,7 +3,7 @@
 
         <div class="mt-3 col-md-12">
             <h4 class="text-center my-3">
-                Nhà xuất bản<i class="fas fa-address-book"></i>
+                Nhà xuất bản
             </h4>
             <NxbList v-if="nxbs.length > 0" :nxbs="nxbs"  @deleteNxb="deleteNxb" v-model:activeIndex="activeIndex" />
             <p v-else>Không có nhà xuất bản nào.</p>
