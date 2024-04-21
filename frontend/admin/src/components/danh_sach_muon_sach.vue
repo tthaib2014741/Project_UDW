@@ -12,7 +12,7 @@
         <tbody>
             <tr v-for="(muonsach, index) in DanhSachMuon" :key="muonsach._id"
                 :class="{ active: index === activeIndex }">
-                <td>{{ muonsach.TENSACH }}</td>
+                <td>{{ muonsach.tensach }}</td>
                 <td>{{ muonsach.TENDOCGIA }}</td>
                 <td>{{ muonsach.NGAYMUON }}</td>
                 <td>{{ muonsach.NGAYTRA }}</td>
@@ -68,12 +68,14 @@ export default {
                 const madocgia = muonsach.MADOCGIA;
                 console.log("muonsach::::::", masach, madocgia)
                 const response = await bookService.get(masach);
-                const responseDOCGIA = await MuonSachService.getDocgia(madocgia);
                 console.log("du lieu tu serrvee::::::");
-                console.log(responseDOCGIA);
+                console.log(response);
+                
+                const responseDOCGIA = await MuonSachService.getDocgia(madocgia);
+                
 
-                muonsach.TENSACH = response.data.TENSACH;
-                console.log(masach.TENSACH);
+                muonsach.tensach = response.TENSACH;
+                console.log(masach.tensach);
                 muonsach.TENDOCGIA = responseDOCGIA.TEN;
             }
         }

@@ -25,7 +25,7 @@
               name:'book.edit',
               params:{id:book._id},
             }">
-              <button class="mx-1 btn-sm btn-warning"> sửa</button>
+              <button class="mx-1 btn-sm btn-warning"> Sửa</button>
             </router-link>
             <button class="btn btn-sm btn-danger" @click="deletebook(book._id)">Xóa</button>
           </td>
@@ -55,32 +55,29 @@ export default {
       for (let i = 0; i < this.Books.length; i++) {
         const book = this.Books[i];
         const maNxb = book.MANXB;
-        
-        console.log(maNxb);
+      
         const response = await NxbService.get(maNxb);
         
-        // console.log(response.data);
+   
         book.TenNxb = response.name;
-        // console.log(book.TenNxb);
-      }// Đảm bảo rằng phương thức getAll() trong service đã được triển khai
+    
+      }
     },
     setup() {
       const router = useRouter();
 
       const editbook = (id) => {
-        // Chuyển hướng sang trang chỉnh sửa nhà xuất bản với id tương ứng
+      
         router.push({ name: 'book.edit', params: { id } });
       };
 
-      // const deletebook = (id) => {
-      //   emit('deletebook',id);
-      // };
+     
 
       return { editbook,  };
     },
     methods: {
       deletebook(id) {
-            console.log(id);
+          
             this.$emit("deletebook",id);
         
         },

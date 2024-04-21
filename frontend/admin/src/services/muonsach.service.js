@@ -85,6 +85,20 @@ class ContactService {
         }
 
     }
+    async huyMuonSach(id) {
+         try {
+            const response = await this.api.delete(`/muonsach/${id}`);
+            console.log("huy")
+
+            console.log(response.data);
+            // console.log("get id");
+            return response.data;
+
+        } catch (error) {
+            console.error("Error while fetching data:", error);
+            throw error;
+        }
+    }
 
     async update(id, data) {
         return (await this.api.put(`/muonsach/${id}`, data)).data;

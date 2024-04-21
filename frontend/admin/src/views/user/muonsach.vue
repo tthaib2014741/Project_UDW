@@ -8,8 +8,8 @@
                     <InputSearch v-model="searchText" />
                 </div>
             </h4>
-            <DanhSachMuon v-if="DanhSachMuon.length > 0" v-model:activeIndex="activeIndex"
-                :DanhSachMuon="DanhSachMuon" />
+            <DanhSachMuon v-if="DanhSachMuon.length > 0" v-model:activeIndex="activeIndex" :DanhSachMuon="DanhSachMuon"
+                @updateDanhSachMuon="updateDanhSachMuon" />
             <p v-else>Không có mượn sách nào.</p>
 
         </div>
@@ -60,6 +60,9 @@ export default {
         },
         refreshList() {
             this.retrievebooks();
+        },
+        updateDanhSachMuon(danhSachMuon) {
+            this.DanhSachMuon = danhSachMuon;
         }
 
 

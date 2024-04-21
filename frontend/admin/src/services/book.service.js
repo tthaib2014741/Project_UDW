@@ -34,7 +34,7 @@ class ContactService {
             console.log("lay sach da muon:")
             console.log(response.data);
             // console.log("get id");
-            return response;
+            return response.data;
 
         } catch (error) {
             console.error("Error while fetching data:", error);

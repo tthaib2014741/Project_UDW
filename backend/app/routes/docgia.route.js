@@ -12,7 +12,7 @@ router.route("/muonsach")
     .get(muonsach.findAll)
 router.route("/muonsach/:id")
     .get(muonsach.findByMADOCGIA)
-
+    .delete(muonsach.huymuon)
 router.route("/:id")
     .get(docgia.get)
 router.route("/muonsach/duyet/:id")

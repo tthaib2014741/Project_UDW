@@ -2,7 +2,7 @@
     <div  class="page">
        <h4 class="text-center">Thêm nhà sản xuất</h4>
        <NxbForm :nxb="nxb" @submit:nxb="addnxb"></NxbForm>
-       <p>{{ message }}</p>
+       <p class="text-success">{{ message }}</p>
    </div>
 </template>
 <script>

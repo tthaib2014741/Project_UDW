@@ -2,9 +2,9 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">Tên</th>
-          <th scope="col">Địa chỉ</th>
-          <th scope="col">Hành động</th>
+          <th scope="col-4">Tên</th>
+          <th scope="col-4">Địa chỉ</th>
+          <th scope="col-4">Hành động</th>
         </tr>
       </thead>
       <tbody>
@@ -45,13 +45,11 @@ export default {
     const router = useRouter();
 
     const editNxb = (id) => {
-      // Chuyển hướng sang trang chỉnh sửa nhà xuất bản với id tương ứng
+
       router.push({ name: 'editNxb', params: { id } });
     };
 
-    // const deleteNxb = (id) => {
-    //   emit('deleteNxb',id);
-    // };
+
 
     return { editNxb,  };
   },

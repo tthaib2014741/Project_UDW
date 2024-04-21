@@ -22,7 +22,7 @@ class ContactService {
    
     async create(payload) {
         const muonsach = this.extractContactData(payload);
-        muonsach.NGAYMUON = new Date();
+        muonsach.NGAYMUON = new Date().toLocaleString();
         muonsach.NGAYTRA = null; 
         muonsach.TRANGTHAI = 0;
         const result = await this.Muonsach.insertOne(muonsach);
@@ -66,13 +66,23 @@ class ContactService {
             _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
         };
         const update = this.extractContactData(muonsach);
-        update.NGAYTRA =  new Date();
+        update.NGAYTRA =  new Date().toLocaleString();
         const result = await this.Muonsach.findOneAndUpdate(
             filter,
             {$set: update},
             {returnDocument:"after"}
         );
         return result;
+    }
+    async huymuon(id) {
+
+        const result = await this.Muonsach.findOneAndDelete({
+            _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
+        });
+        if (result.TRANGTHAI == 0) {
+             return result;
+        }
+       
     }
 }
 

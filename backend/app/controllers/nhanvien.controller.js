@@ -30,3 +30,18 @@ exports.create = async (req, res, next) => {
         return next(new ApiError(500, "An error occurred while creating "));
     }
 };
+exports.huymuon = async (req, res, next) => {
+    try {
+        const nhanvienService = new NhanvienService(MongoDB.client);
+        const document = await nhanvienService.delete(req.params.id);
+        if(!document){
+            return next(new ApiError(400, "không tìm thấy thông tin mượn"));
+        }
+        return res.send({ message: "Hủy thành công" });
+
+    } catch (error) {
+        return next(new ApiError(500, 
+            `không tìm thấy  id=${req.params.id}`));
+    }
+   
+};

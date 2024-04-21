@@ -88,5 +88,19 @@ exports.tra = async (req, res, next) => {
     }
    
 };
+exports.huymuon = async (req, res, next) => {
+    try {
+        const muonsachService = new MuonsachService(MongoDB.client);
+        const document = await muonsachService.huymuon(req.params.id);
+        if(!document){
+            return next(new ApiError(400, "không tìm thấy thông tin mượn"));
+        }
+        return res.status(200).send({ message: "hủy thành công" });
 
+    } catch (error) {
+        return next(new ApiError(500, 
+            `khong the xoa  id=${req.params.id}`));
+    }
+   
+};
 

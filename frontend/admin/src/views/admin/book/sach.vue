@@ -2,24 +2,25 @@
     <div class="page row">
 
         <div class="mt-3 col-md-12">
-            <h4 class="text-center my-3">
+            <h3 class="text-center my-3 text-primary">
                 Sách trong thư viện
-                <div>
-                    <InputSearch v-model="searchText" />
-                </div>
-            </h4>
-            <BookList v-if="Books.length > 0" :Books="filteredBooks" @deletebook="deletebook"
-                v-model:activeIndex="activeIndex" />
-            <p v-else>Không có nhà xuất bản nào.</p>
-            <div class="mt-3 row justify-content-around align-items-center">
 
-                <router-link :to="{ name: 'book.add' }">
-                    <button class="btn btn-sm btn-success">
+            </h3>
+            <div class="my-3 row justify-content-around align-items-center">
+
+                <router-link :to="{ name: 'book.add' }" class="px-5 col-sm-3">
+                    <button class="btn btn-sm btn-success ">
                         <i class="fas fa-plus"></i> Thêm mới
                     </button>
                 </router-link>
-
+                <div class="col-sm-9 px-5">
+                    <InputSearch v-model="searchText" />
+                </div>
             </div>
+            <BookList v-if="Books.length > 0" :Books="filteredBooks" @deletebook="deletebook"
+                v-model:activeIndex="activeIndex" />
+            <p v-else>Không có sách nào trong thư viện.</p>
+
         </div>
 
 

@@ -24,7 +24,7 @@
        methods:{
            async getBook(id){
                try{
-                   // console.log(id);
+                   console.log("id sach lay",id);
                    this.Book = await BookService.get(id);
                    console.log(this.Book);
                }catch(error){

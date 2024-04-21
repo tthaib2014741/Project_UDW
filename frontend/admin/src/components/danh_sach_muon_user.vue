@@ -37,6 +37,7 @@
 
 import bookService from "@/services/book.service";
 import MuonSachService from "@/services/muonsach.service";
+import { mapGetters } from "vuex";
 
 export default {
     props: {
@@ -48,6 +49,9 @@ export default {
     async created() {
         await this.fetchBookDetails();
     },
+    computed: {
+        ...mapGetters(["loggedInUser"]),
+    },
     methods: {
         async fetchBookDetails() {
             for (let i = 0; i < this.DanhSachMuon.length; i++) {
@@ -57,7 +61,7 @@ export default {
                 const response = await bookService.get(masach);
                 const responseDOCGIA = await MuonSachService.getDocgia(madocgia);
 
-                muonsach.TENSACH = response.data.TENSACH;
+                muonsach.TENSACH = response.TENSACH;
                 muonsach.TENDOCGIA = responseDOCGIA.TEN;
             }
         },
@@ -65,11 +69,22 @@ export default {
             try {
                 await MuonSachService.huyMuonSach(muonsachId);
                 // Cập nhật lại danh sách mượn sau khi hủy mượn
-                this.$emit('updateDanhSachMuon', await MuonSachService.getAll());
+                this.$emit('updateDanhSachMuon', await MuonSachService.get(this.loggedInUser.id));
             } catch (error) {
                 console.error("Lỗi khi hủy mượn sách:", error);
             }
         }
     },
+    mounted() {
+        // Gọi fetchBookDetails khi component được tạo ra
+        this.fetchBookDetails();
+    },
+    watch: {
+        // Watch for changes in props.DanhSachMuon
+        DanhSachMuon: {
+            handler: 'fetchBookDetails', // Call fetchBookDetails when props.DanhSachMuon changes
+            deep: true // Watch changes deeply in props.DanhSachMuon
+        }
+    }
 };
 </script>

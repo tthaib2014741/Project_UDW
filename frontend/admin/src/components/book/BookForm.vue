@@ -63,16 +63,15 @@ import NxbService from "@/services/nxb.service";
         BookLocal: { ...this.Book },
         contactFormSchema: yup.object().shape({
           TENSACH: yup.string().required("Tên là bắt buộc.").min(2, "Tên phải có ít nhất 2 ký tự.").max(50, "Tên không được vượt quá 50 ký tự."),
-          // Các quy tắc kiểm tra khác
+      
         }),
         publishers: [] // Danh sách nhà xuất bản
       };
     },
     async created() {
-      // Lấy danh sách nhà xuất bản từ backend
-      // Gán vào mảng publishers
+   
       this.publishers = await NxbService.getAll(); 
-      console.log(this.publishers.data);// Đảm bảo rằng phương thức getAll() trong service đã được triển khai
+      console.log(this.publishers.data);
     },
     methods: {
       submitContact() {
