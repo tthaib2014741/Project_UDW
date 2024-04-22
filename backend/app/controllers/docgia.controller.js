@@ -23,7 +23,7 @@ exports.create = async (req, res, next) => {
         const docgia = new Docgia(MongoDB.client);
         const document = await docgia.create(req.body);
         
-        return res.status(200).send({ message: "Thêm nhân viên thành công", createdContact: document });
+        return res.status(200).send({ message: "Thêm Doc gia thành công", createdContact: document });
     } catch (error) {
         console.log(error);
         return next(new ApiError(500, "An error occurred while creating "));

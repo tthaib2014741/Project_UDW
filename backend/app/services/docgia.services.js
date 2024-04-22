@@ -7,7 +7,6 @@ class DocgiaService {
 
     extractContactData(payload) {
         const DOCGIA = {
-            MADOCGIA: payload.MADOCGIA,
             HOLOT: payload.HOLOT,
             TEN: payload.TEN,
             PASSWORD: payload.PASSWORD,
@@ -23,8 +22,6 @@ class DocgiaService {
         return DOCGIA;
     }
 
-   
-    
     async create(payload) {
         const docgia = this.extractContactData(payload);
         const hashedPassword = await bcrypt.hash(docgia.PASSWORD, 10);
@@ -45,16 +42,16 @@ class DocgiaService {
             console.log(`user kt:::${username},:::${password}`);
             const user = await this.Docgia.findOne({ TEN: username });
             if (!user) {
-                return null; // Không tìm thấy người dùng
+                return null; 
             }
-            // So sánh mật khẩu
+        
             const passwordMatch = await bcrypt.compare(password, user.PASSWORD);
             if (!passwordMatch) {
-                return null; // Mật khẩu không khớp
+                return null;
             }
             console.log(user);
 
-            return user; // Đăng nhập thành công, trả về thông tin người dùng
+            return user;
         } catch (error) {
             throw new ApiError(500, "Lỗi trong quá trình xác thực người dùng");
         }
@@ -65,9 +62,9 @@ class DocgiaService {
             const user = await this.Docgia.findOne({ TEN: username });
             console.log(user);
             if (!user) {
-                return null; // Không tìm thấy người dùng
+                return null; 
             }
-            return user; // Đăng nhập thành công, trả về thông tin người dùng
+            return user; 
         } catch (error) {
             throw new ApiError(500, "Lỗi trong quá trình xác thực người dùng");
         }

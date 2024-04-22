@@ -40,7 +40,6 @@ class NhanvienService {
         try {
             console.log(`Quan ly::::du lieu kt:::${username},:::${password}`);
             const user = await this.Nhanvien.findOne({ HOTENNV: username });
-            console.log(user);
             if (!user) {
                 return null; // Không tìm thấy người dùng
             }
@@ -49,6 +48,8 @@ class NhanvienService {
             if (!passwordMatch) {
                 return null; // Mật khẩu không khớp
             }
+            console.log(user);
+
             return user; // Đăng nhập thành công, trả về thông tin người dùng
         } catch (error) {
             throw new ApiError(500, "Lỗi trong quá trình xác thực người dùng");

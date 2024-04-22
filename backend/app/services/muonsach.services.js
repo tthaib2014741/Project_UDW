@@ -1,8 +1,9 @@
 const { ObjectId } = require("mongodb");
-
-class ContactService {
+const bookservice = require('./book.services');
+class muonsachService {
     constructor(client) {
         this.Muonsach = client.db().collection("muonsach");
+         this.bookService = new bookservice(client);
     }
 
     extractContactData(payload) {
@@ -47,16 +48,23 @@ class ContactService {
     // }
     async duyet(id) {
         const muonsach= { };
+       
         const filter ={
             _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
         };
-        const update = this.extractContactData(muonsach);
-       update.TRANGTHAI = 1;
+         const update = this.extractContactData(muonsach);
+         update.TRANGTHAI = 1;
         const result = await this.Muonsach.findOneAndUpdate(
             filter,
             {$set: update},
             {returnDocument:"after"}
         );
+        console.log("ma sach");
+        console.log(result.MASACH);
+        if (result) {
+        // Giảm số quyển trong sách
+        await this.bookService.giamSoQuyenTrongSach(result.MASACH);
+    }
         return result;
     }
     async tra(id, payload) {
@@ -72,6 +80,10 @@ class ContactService {
             {$set: update},
             {returnDocument:"after"}
         );
+        if (result) {
+            // Giảm số quyển trong sách
+            await this.bookService.TangSoQuyenTrongSach(result.MASACH);
+        }
         return result;
     }
     async huymuon(id) {
@@ -86,4 +98,4 @@ class ContactService {
     }
 }
 
-module.exports = ContactService;
+module.exports = muonsachService;

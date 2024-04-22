@@ -2,16 +2,19 @@
     <table class="table">
         <thead>
             <tr>
+                <th>STT</th>
                 <th scope="col">Tên sách</th>
                 <th scope="col">Tên đọc giả</th>
                 <th scope="col">Ngay mượn</th>
                 <th scope="col">Ngày trả</th>
-                <th scope="col">Hành động</th>
+                <th scope="col">Trạng thái</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="(muonsach, index) in DanhSachMuon" :key="muonsach._id"
                 :class="{ active: index === activeIndex }">
+                <td>{{ index + 1 }}</td>
+
                 <td>{{ muonsach.tensach }}</td>
                 <td>{{ muonsach.TENDOCGIA }}</td>
                 <td>{{ muonsach.NGAYMUON }}</td>

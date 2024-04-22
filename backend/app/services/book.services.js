@@ -73,6 +73,59 @@ class ContactService {
         console.log(result);
         return result.deletedCount;
     }
+    async giamSoQuyenTrongSach(maSach) {
+        console.log("giam sách");
+    try {
+        const filter ={
+            _id: ObjectId.isValid(maSach) ? new ObjectId(maSach) : null,
+        };
+        const update = { $inc: { SOQUYEN: -1 } };
+
+        const result = await this.Sach.findOneAndUpdate(
+            filter,
+            update,
+            { returnOriginal: false } // Trả về dữ liệu sau khi cập nhật
+        );
+
+        if (!result) {
+            console.log("Không tìm thấy sách để cập nhật.");
+            // Xử lý logic nếu sách không tồn tại
+        } else {
+            console.log("Số quyển trong sách đã được giảm.");
+            // Xử lý logic sau khi giảm số quyển thành công
+        }
+    } catch (error) {
+        console.error("Lỗi khi cập nhật số quyển trong sách:", error);
+        // Xử lý lỗi
+    }
+    }
+     async TangSoQuyenTrongSach(maSach) {
+        console.log("giam sách");
+    try {
+        const filter ={
+            _id: ObjectId.isValid(maSach) ? new ObjectId(maSach) : null,
+        };
+        const update = { $inc: { SOQUYEN: +1 } };
+
+        const result = await this.Sach.findOneAndUpdate(
+            filter,
+            update,
+            { returnOriginal: false } // Trả về dữ liệu sau khi cập nhật
+        );
+
+        if (!result) {
+            console.log("Không tìm thấy sách để cập nhật.");
+            // Xử lý logic nếu sách không tồn tại
+        } else {
+            console.log("Số quyển trong sách đã được giảm.");
+            // Xử lý logic sau khi giảm số quyển thành công
+        }
+    } catch (error) {
+        console.error("Lỗi khi cập nhật số quyển trong sách:", error);
+        // Xử lý lỗi
+    }
+}
+
 }
 
 module.exports = ContactService;

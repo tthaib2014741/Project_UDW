@@ -1,31 +1,33 @@
 <template>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col-4">Tên</th>
-          <th scope="col-4">Địa chỉ</th>
-          <th scope="col-4">Hành động</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(nxb, index) in nxbs" :key="nxb._id"
-            :class="{ active: index === activeIndex }" >
-          <td>{{ nxb.name }}</td>
-          <td>{{ nxb.address }}</td>
-          <td>
-            <router-link :to="{
+  <table class="table">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th scope="col-4">Tên</th>
+        <th scope="col-4">Địa chỉ</th>
+        <th scope="col-4">Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(nxb, index) in nxbs" :key="nxb._id" :class="{ active: index === activeIndex }">
+        <td>{{ index + 1 }}</td>
+
+        <td>{{ nxb.name }}</td>
+        <td>{{ nxb.address }}</td>
+        <td>
+          <router-link :to="{
               name:'editNxb',
               params:{id:nxb._id},
             }">
-              <button class="mx-1 btn-sm btn-warning"> sửa</button>
-            </router-link>
-            <button class="btn btn-sm btn-danger" @click="deleteNxb(nxb._id)">Xóa</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </template>
-  <!-- Trong file NxbList.vue -->
+            <button class="mx-1 btn-sm btn-warning"> Sửa</button>
+          </router-link>
+          <button class="btn btn-sm btn-danger" @click="deleteNxb(nxb._id)">Xóa</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</template>
+ 
 
 
   
