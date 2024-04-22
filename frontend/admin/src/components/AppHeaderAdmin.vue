@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand text-light px-5 bg-gradient-custom ">
-    
+
     <div class="mr-auto navbar-nav ml-5 px-5">
       <li class="nav-item">
         <router-link :to="{ name: 'nxb' }" class="nav-link text-light">
@@ -11,7 +11,7 @@
       <li class="mx-3">
         <router-link :to="{ name: 'sach.admin' }" class="nav-link text-light">
           <i class="fa-solid fa-book" style="color: #ffffff;"></i> Sách
-         
+
         </router-link>
       </li>
       <li>
@@ -24,10 +24,10 @@
 
     <div class="navbar-nav ml-auto">
       <li class="nav-item">
-        <div v-if="loggedInUser && loggedInUser.role === 'admin'" class="nav-item">
+        <div v-if="adminLoggedInUser && adminLoggedInUser.role === 'admin'" class="nav-item">
           <div class="d-flex align-items-center text-light">
-            Xin chào {{ loggedInUser.username }}
-            <button @click="logout" class="btn btn-link nav-link text-light ml-2">
+            Xin chào {{ adminLoggedInUser.username }}
+            <button @click="handleLogout" class="btn btn-link nav-link text-light ml-2">
               <i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffffff;"></i> Đăng xuất
             </button>
           </div>
@@ -57,10 +57,15 @@
 import { mapGetters, mapActions } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["loggedInUser"]),
+    ...mapGetters(["adminLoggedInUser"]),
   },
   methods: {
-    ...mapActions(["logout"]),
+    ...mapActions(["logoutAdmin"]),
+    handleLogout() {
+      this.logoutAdmin();
+      // Sau khi đăng xuất, chuyển hướng về trang sách
+      this.$router.push({ name: 'login.admin' });
+    }
   },
 };
 </script>

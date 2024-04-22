@@ -44,12 +44,12 @@ export default {
             if (this.activeIndex < 0) return null;
             return this.DanhSachMuon[this.activeIndex];
         },
-        ...mapGetters(["loggedInUser"]),
+        ...mapGetters(["userLoggedInUser"]),
     },
     methods: {
         async retrievebooks() {
             try {
-                this.DanhSachMuon = await MuonSachService.get(this.loggedInUser.id);
+                this.DanhSachMuon = await MuonSachService.get(this.userLoggedInUser.id);
                 console.log(this.DanhSachMuon);
             } catch (error) {
                 console.log(error);

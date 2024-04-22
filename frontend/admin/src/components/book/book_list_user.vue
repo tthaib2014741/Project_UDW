@@ -77,8 +77,8 @@ export default {
         async muonSach(bookId) {
             const router = useRouter();
 
-            const userId = this.loggedInUser && this.loggedInUser.role=="user" ? this.loggedInUser.id : null;
-            // const userRole= this.loggedInUser ? this.loggedInUser.role : null;
+            const userId = this.userLoggedInUser  ? this.userLoggedInUser.id : null;
+            // const userRole= this.userLoggedInUser ? this.userLoggedInUser.role : null;
             if (!userId ) {
                 this.$router.push('/login');
 
@@ -102,7 +102,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["loggedInUser"]),
+        ...mapGetters(["userLoggedInUser"]),
     },
 };
 </script>

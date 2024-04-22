@@ -18,11 +18,11 @@
 
         <div class="navbar-nav ml-auto">
             <li class="nav-item">
-                <div v-if="loggedInUser && loggedInUser.role === 'user'" class="nav-item">
+                <div v-if="userLoggedInUser && userLoggedInUser.role === 'user'" class="nav-item">
                     <div class="d-flex align-items-center text-light">
-                        Xin chào {{ loggedInUser.username }}
+                        Xin chào {{ userLoggedInUser.username }}
 
-                        <button @click="logout" class="btn btn-link nav-link text-light ml-2">
+                        <button @click="handleLogout" class="btn btn-link nav-link text-light ml-2">
                             <i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffffff;"></i> Đăng xuất
                         </button>
                     </div>
@@ -56,10 +56,15 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
     computed: {
-        ...mapGetters(['loggedInUser'])
+        ...mapGetters(['userLoggedInUser'])
     },
     methods: {
-        ...mapActions(['logout'])
+        ...mapActions(['logoutUser']),
+        handleLogout() {
+            this.logoutUser();
+            // Sau khi đăng xuất, chuyển hướng về trang sách
+            this.$router.push({ name: 'sach.user' });
+        }
     }
 };
 </script>

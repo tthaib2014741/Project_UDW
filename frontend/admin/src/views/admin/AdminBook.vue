@@ -1,14 +1,16 @@
 <template>
+  <div>
+
     <div>
-    
-      <div>
-        <div v-if="loggedInUser">
-         <h2 class="text-primary text-center mt-3 pt-3"> Chào mừng quản lý <b>{{ loggedInUser.username }}</b> đến với trang quản lý mượn sách </h2>
-        </div>
-      
+      <div v-if="adminLoggedInUser">
+        <h2 class="text-primary text-center mt-3 pt-3"> Chào mừng quản lý <b>{{ adminLoggedInUser.username }}</b> đến
+          với
+          trang quản lý mượn sách </h2>
       </div>
+
     </div>
-  </template>
+  </div>
+</template>
   
  
   
@@ -19,10 +21,10 @@
   }
   </style>
   <script>
-  import { mapGetters, mapActions } from "vuex";
+  import { mapGetters } from "vuex";
   export default {
     computed: {
-      ...mapGetters(["loggedInUser"]),
+      ...mapGetters(["adminLoggedInUser"]),
     },
   
   };

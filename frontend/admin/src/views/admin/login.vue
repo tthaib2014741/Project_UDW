@@ -78,15 +78,15 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['setLoggedInUser']),
+    ...mapActions(['setAdminLoggedInUser']),
     async login() {
       try {
         const response = await nhanvienService.login(this.nhanvien);
         if (response.status === "success") {
           console.log('response:', response);
 
-          localStorage.setItem('loggedInUser', JSON.stringify({ username: response.user.HOTENNV, id: response.user._id ,role:"admin"}));
-          this.setLoggedInUser({ username: response.user.HOTENNV, id: response.user._id, role: "admin" });
+          localStorage.setItem('adminLoggedInUser', JSON.stringify({ username: response.user.HOTENNV, id: response.user._id ,role:"admin"}));
+          this.setAdminLoggedInUser({ username: response.user.HOTENNV, id: response.user._id, role: "admin" });
       //  console.log('loggedInUser:',loggedInUser.role);
           
           this.$router.push('/quanly');
@@ -100,9 +100,10 @@ export default {
   },
   created() {
     // Kiểm tra nếu có thông tin đăng nhập trong local storage khi component được tạo
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    if (loggedInUser) {
-      this.$store.dispatch('setLoggedInUser', JSON.parse(loggedInUser));
+    const adminLoggedInUser = localStorage.getItem('adminLoggedInUser');
+    if (adminLoggedInUser) {
+      // Đăng nhập với thông tin đăng nhập của admin
+      this.setAdminLoggedInUser(JSON.parse(adminLoggedInUser));
     }
   }
 };

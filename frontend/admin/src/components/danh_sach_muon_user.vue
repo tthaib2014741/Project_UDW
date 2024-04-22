@@ -51,26 +51,22 @@ export default {
         await this.fetchBookDetails();
     },
     computed: {
-        ...mapGetters(["loggedInUser"]),
+        ...mapGetters(["userLoggedInUser"]),
     },
     methods: {
         async fetchBookDetails() {
             for (let i = 0; i < this.DanhSachMuon.length; i++) {
                 const muonsach = this.DanhSachMuon[i];
                 const masach = muonsach.MASACH;
-                const madocgia = muonsach.MADOCGIA;
                 const response = await bookService.get(masach);
-                const responseDOCGIA = await MuonSachService.getDocgia(madocgia);
-
                 muonsach.TENSACH = response.TENSACH;
-                muonsach.TENDOCGIA = responseDOCGIA.TEN;
             }
         },
         async HuyMuon(muonsachId) {
             try {
                 await MuonSachService.huyMuonSach(muonsachId);
                 // Cập nhật lại danh sách mượn sau khi hủy mượn
-                this.$emit('updateDanhSachMuon', await MuonSachService.get(this.loggedInUser.id));
+                this.$emit('updateDanhSachMuon', await MuonSachService.get(this.userLoggedInUser.id));
             } catch (error) {
                 console.error("Lỗi khi hủy mượn sách:", error);
             }

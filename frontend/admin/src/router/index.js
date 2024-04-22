@@ -95,31 +95,22 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    console.log("mít đờ que");
-    console.log(store.getters.loggedInUser);
-
-
     if (to.matched.some(record => record.meta.requiresAuthAdmin)) {
-    
-        if (!store.getters.loggedInUser || store.getters.loggedInUser.role !== 'admin') {
-          
+        if (!store.getters.adminLoggedInUser || store.getters.adminLoggedInUser.role !== 'admin') {
             next({ name: 'login.admin' });
         } else {
-      
             next();
         }
     } else if (to.matched.some(record => record.meta.requiresAuthUser)) {
-     
-        if (!store.getters.loggedInUser || store.getters.loggedInUser.role !== 'user') {
-          
+        if (!store.getters.userLoggedInUser || store.getters.userLoggedInUser.role !== 'user') {
             next({ name: 'login.user' });
         } else {
-         
             next();
         }
     } else {
         next(); 
     }
 });
+
 
 export default router;

@@ -38,7 +38,7 @@ export default {
         };
     },
     methods: {
-        ...mapActions(['setLoggedInUser']),
+        ...mapActions(['setUserLoggedInUser']),
         async login() {
             try {
                 console.log(`Thong tin login userr `);
@@ -48,9 +48,9 @@ export default {
                 console.log(response);
                 if (response.status === "success") {
                     console.log("dang nhap user");
-                     localStorage.setItem('loggedInUser', JSON.stringify({ username: response.user.TEN, id: response.user._id ,role:"user"}));
-                    this.setLoggedInUser({ username: response.user.TEN, id: response.user._id, role: "user" });
-                    console.log('loggedInUser:', this.loggedInUser);
+                    localStorage.setItem('userLoggedInUser', JSON.stringify({ username: response.user.TEN, id: response.user._id ,role:"user"}));
+                    this.setUserLoggedInUser({ username: response.user.TEN, id: response.user._id, role: "user" });
+                    // console.log('loggedInUser:', this.loggedInUser);
                     this.$router.push('/sach');
                 } else {
                     this.error = 'Tên đăng nhập hoặc mật khẩu không chính xác.';
@@ -62,9 +62,10 @@ export default {
     },
     created() {
         // Kiểm tra nếu có thông tin đăng nhập trong local storage khi component được tạo
-        const loggedInUser = localStorage.getItem('loggedInUser');
-        if (loggedInUser) {
-            this.setLoggedInUser(JSON.parse(loggedInUser));
+        const userLoggedInUser = localStorage.getItem('userLoggedInUser');
+        if (userLoggedInUser) {
+            // Đăng nhập với thông tin đăng nhập của người dùng
+            this.setUserLoggedInUser(JSON.parse(userLoggedInUser));
         }
     }
 };
