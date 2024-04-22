@@ -6,14 +6,14 @@
             :class="{ active: index === activeIndex }">
             <div>
                 <div class="card-body m-2 p-2">
-                    <h5 class="card-title"><strong>{{ book.TENSACH }}</strong></h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Tác giả: {{ book.TACGIA }} </h6>
+                    <h5 class="card-title text-center"><strong>{{ book.TENSACH }}</strong></h5>
+                    <h6 class="card-subtitle mb-2 text-muted text-center">Tác giả: {{ book.TACGIA }} </h6>
                     <hr>
                     <div class="card-text row">
-                        <p class="col-6">Số quyển: {{ book.SOQUYEN }} </p>
-                        <p class="col-6">Năm xuất bản: {{ book.NAMXUATBAN }} </p>
-                        <p class="col-6">Nhà xuất bản: {{ book.TenNxb }} </p>
-                        <p class="col-6">Tác giả: {{ book.DONGIA }} </p>
+                        <p class="col-9">Số quyển: {{ book.SOQUYEN }} </p>
+                        <p class="col-9">Năm xuất bản: {{ book.NAMXUATBAN }} </p>
+                        <p class="col-9">Nhà xuất bản: {{ book.TenNxb }} </p>
+                        <p class="col-9">Đơn giá: {{ book.DONGIA }} </p>
 
                     </div>
                     <hr>
@@ -54,10 +54,10 @@ export default {
             console.log(maNxb);
             const response = await NxbService.get(maNxb);
 
-            // console.log(response.data);
+
             book.TenNxb = response.name;
-            // console.log(book.TenNxb);
-        }// Đảm bảo rằng phương thức getAll() trong service đã được triển khai
+
+        }
     },
     setup() {
         const router = useRouter();
@@ -77,7 +77,13 @@ export default {
         async muonSach(bookId) {
             const router = useRouter();
 
-            const userId = this.loggedInUser.id;
+            const userId = this.loggedInUser && this.loggedInUser.role=="user" ? this.loggedInUser.id : null;
+            // const userRole= this.loggedInUser ? this.loggedInUser.role : null;
+            if (!userId ) {
+                this.$router.push('/login');
+
+                return;
+            }
             const data = {
                 MASACH: bookId,
                 MADOCGIA: userId
