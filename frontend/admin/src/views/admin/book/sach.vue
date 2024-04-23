@@ -70,7 +70,7 @@ export default {
     },
     methods: {
         async deletebook(id) {
-       if (confirm("Bạn muốn xóa nhà xuất bản này?")) {
+       if (confirm("Bạn muốn xóa sách này?")) {
         try {
           await BookService.delete(id);
           // Sau khi xóa thành công, cập nhật lại danh sách nhà xuất bản

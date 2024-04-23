@@ -5,7 +5,7 @@
                 <th>STT</th>
                 <th scope="col">Tên sách</th>
             
-                <th scope="col">Ngay mượn</th>
+                <th scope="col">Ngày mượn</th>
                 <th scope="col">Ngày trả</th>
                 <th scope="col">Trạng thái</th>
             </tr>
